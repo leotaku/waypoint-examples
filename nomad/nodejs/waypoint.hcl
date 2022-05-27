@@ -2,11 +2,20 @@ project = "example-nodejs"
 
 app "example-nodejs" {
 
+  runner {
+    enabled = true
+
+    data_source "git" {
+      url  = "https://github.com/hashicorp/waypoint-examples.git"
+      path = "nomad/nodejs"
+    }
+  }
+
   build {
     use "pack" {}
     registry {
       use "docker" {
-        image = "nodejs-example"
+        image = "localhost:5000/nodejs-example"
         tag   = "1"
         local = true
       }
